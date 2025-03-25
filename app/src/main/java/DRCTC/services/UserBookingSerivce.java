@@ -2,9 +2,11 @@ package DRCTC.services;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import DRCTC.entities.Train;
 import DRCTC.entities.User;
 import DRCTC.util.UserServiceUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,12 +28,18 @@ public class UserBookingSerivce
     public UserBookingSerivce(User user) throws IOException
     {
         this.user = user;
+        loadUser();
+    }
 
-        // fetch user stores in DB user.json file
+    // default constructor of this class that loads user from file and load to userList
+    public  UserBookingSerivce() throws  IOException{
+        loadUser();
+    }
+
+    public List<User> loadUser() throws IOException{
         File users = new File(USERS_PATH);
-
         ObjectMapper objectMapper = new ObjectMapper();
-        userList = objectMapper.readValue(users, new TypeReference<List<User>>() {});
+        return objectMapper.readValue(users, new TypeReference<List<User>>() {});
     }
 
     // Login User
@@ -57,10 +65,33 @@ public class UserBookingSerivce
     }
 
     // function to save user list to a file
+    // we are serializing user here
     private void saveUserListToFile() throws IOException{
         File usersFile = new File(USERS_PATH);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.writeValue(usersFile, userList);
     }
 
+    // json to object | class => deserialize
+    // object to json => serialize
+
+    // fetch ticket bookings of user
+    public  void fetchBooking(){
+        user.printTickets();
+    }
+
+    // cancel booking
+    public  Boolean cancelBooking(String ticketId){
+        return Boolean.FALSE;
+    }
+
+    // get trains
+    public List<Train> getTrains(String source, String destination){
+        try{
+            TrainService trainService = new TrainService();
+            return trainService.searchTrains(source, destination);
+        }catch (IOException e){
+            return new ArrayList<>();
+        }
+    }
 }
