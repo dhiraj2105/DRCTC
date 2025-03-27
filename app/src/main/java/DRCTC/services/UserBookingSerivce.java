@@ -94,4 +94,25 @@ public class UserBookingSerivce
             return new ArrayList<>();
         }
     }
+
+    public List<List<Integer>> fetchSeats(Train train){
+        return train.getSeats();
+    }
+    public Boolean bookTrainSeat(Train train,int row, int seat){
+        try{
+         TrainService trainService = new TrainService();
+         List<List<Integer>> seats = train.getSeats();
+         if(row >= 0 && row < seats.size() && seat >= 0 && seat < seats.get(row).size()){
+             if(seats.get(row).get(seat) == 0){
+                 seats.get(row).set(seat, 1);
+                 train.setSeats(seats);
+                 trainService.addTrain(train);
+             }else{return  false;}
+         }else{
+             return false;
+         }
+        }catch (IOException e){
+            return Boolean.FALSE;
+        }
+    }
 }
