@@ -22,14 +22,14 @@ public class App {
 
         UserBookingSerivce userBookingSerivce;
 
-        try{
+        try {
             userBookingSerivce = new UserBookingSerivce();
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("There is something wrong");
             return;
         }
-        
-        while(option != 7){
+
+        while (option != 7) {
             System.out.println("Choose Option");
             System.out.println("1. Sign up");
             System.out.println("2. Login");
@@ -45,7 +45,7 @@ public class App {
             System.out.println("Enter the password : ");
             String password = scanner.next();
 
-            switch (option){
+            switch (option) {
                 case 1:
                     User userToSignup = new User(name, password,
                             UserServiceUtil.hashPassword(password),
@@ -54,15 +54,15 @@ public class App {
                     userBookingSerivce.signUp(userToSignup);
                     break;
                 case 2:
-                   User userToLogin = new User(name, password,
-                           UserServiceUtil.hashPassword(password),
-                           new ArrayList<>(), UUID.randomUUID().toString());
-                   try{
-                       userBookingSerivce = new UserBookingSerivce(userToLogin);
-                   }catch (IOException e){
-                       return;
-                   }
-                   break;
+                    User userToLogin = new User(name, password,
+                            UserServiceUtil.hashPassword(password),
+                            new ArrayList<>(), UUID.randomUUID().toString());
+                    try {
+                        userBookingSerivce = new UserBookingSerivce(userToLogin);
+                    } catch (IOException e) {
+                        return;
+                    }
+                    break;
                 case 3:
                     System.out.println("Fetching your bookings");
                     userBookingSerivce.fetchBooking();
@@ -75,10 +75,10 @@ public class App {
 
                     List<Train> trains = userBookingSerivce.getTrains(source, destination);
                     int index = 1;
-                    for(Train t : trains){
-                        System.out.println(index+ " Train id : "+ t.getTrainId());
-                        for(Map.Entry<String,String> entry: t.getStationTimes().entrySet()){
-                            System.out.println("Station "+ entry.getKey() + " time: "+ entry.getValue());
+                    for (Train t : trains) {
+                        System.out.println(index + " Train id : " + t.getTrainId());
+                        for (Map.Entry<String, String> entry : t.getStationTimes().entrySet()) {
+                            System.out.println("Station " + entry.getKey() + " time: " + entry.getValue());
                         }
                     }
                     System.out.println("Select a train by typing 1,2,3...");
@@ -87,8 +87,8 @@ public class App {
                 case 5:
                     System.out.println("Select a seat out of these seats");
                     List<List<Integer>> seats = userBookingSerivce.fetchSeats(trainSelectedForBooking);
-                    for(List<Integer> row: seats){
-                        for(Integer val : row){
+                    for (List<Integer> row : seats) {
+                        for (Integer val : row) {
                             System.out.println(val + " ");
                         }
                         System.out.println();
@@ -100,9 +100,9 @@ public class App {
                     int col = scanner.nextInt();
                     System.out.println("Booking your seat...");
                     Boolean booked = userBookingSerivce.bookTrainSeat(trainSelectedForBooking, row, col);
-                    if(booked.equals(Boolean.TRUE)) {
-                    System.out.println("Booked!");
-                    }else{
+                    if (booked.equals(Boolean.TRUE)) {
+                        System.out.println("Booked!");
+                    } else {
                         System.out.println("Can't book this seat");
                     }
                     break;
