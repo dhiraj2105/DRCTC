@@ -45,6 +45,8 @@ public class App {
             System.out.println("Enter the password : ");
             String password = scanner.next();
 
+            Train trainSelectedForBooking = new Train();
+
             switch (option) {
                 case 1:
                     User userToSignup = new User(name, password,
@@ -82,7 +84,7 @@ public class App {
                         }
                     }
                     System.out.println("Select a train by typing 1,2,3...");
-                    Train trainSelectedForBooking = trains.get(scanner.nextInt());
+                    trainSelectedForBooking = trains.get(scanner.nextInt());
                     break;
                 case 5:
                     System.out.println("Select a seat out of these seats");
