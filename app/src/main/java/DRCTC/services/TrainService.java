@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class TrainService {
@@ -22,7 +21,8 @@ public class TrainService {
     public TrainService() throws IOException{
         File trains = new File(TRAIN_DB_PATH);
         ObjectMapper objectMapper = new ObjectMapper();
-        trainList = objectMapper.readValue(trains, new TypeReference<List<Train>>() {});
+        trainList = objectMapper.readValue(trains, new TypeReference<>() {
+        });
     }
 
     // search trains
