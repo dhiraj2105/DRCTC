@@ -40,8 +40,8 @@ public class User {
     }
 
     public void printTickets(){
-        for(int i=0; i<ticketBooked.size();i++){
-            System.out.println(ticketBooked.get(i).getTicketInfo());
+        for (Ticket ticket : ticketBooked) {
+            System.out.println(ticket.getTicketInfo());
         }
     }
 

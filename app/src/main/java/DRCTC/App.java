@@ -6,10 +6,7 @@ import DRCTC.services.UserBookingSerivce;
 import DRCTC.util.UserServiceUtil;
 
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class App {
 
@@ -25,7 +22,7 @@ public class App {
         try {
             userBookingSerivce = new UserBookingSerivce();
         } catch (IOException e) {
-            System.out.println("There is something wrong");
+            System.out.println("There is something wrong : "+ e);
             return;
         }
 

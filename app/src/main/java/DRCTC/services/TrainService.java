@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
 public class TrainService {
 
     private final List<Train> trainList;
-    private static final String TRAIN_DB_PATH = "../localDB/trains.json";
+    private static final String TRAIN_DB_PATH = "app/src/main/java/DRCTC/localDb/trains.json";
 
 
     // default constructor

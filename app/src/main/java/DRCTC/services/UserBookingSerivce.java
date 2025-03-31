@@ -21,7 +21,7 @@ public class UserBookingSerivce {
     private List<User> userList;
 
     // file path
-    private static final String USERS_PATH = "../localdb/users.json";
+    private static final String USERS_PATH = "app/src/main/java/DRCTC/localDb/users.json";
 
     // user constructor
     public UserBookingSerivce(User user) throws IOException {
@@ -117,5 +117,6 @@ public class UserBookingSerivce {
         } catch (IOException e) {
             return Boolean.FALSE;
         }
+        return true;
     }
 }
